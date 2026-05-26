@@ -7,330 +7,381 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+    :root {
+      --indigo: #4f46e5;
+      --violet: #7c3aed;
+      --green:  #059669;
+      --red:    #dc2626;
+      --bg:     #f0f4ff;
+      --card:   #ffffff;
+      --text:   #1e1e2e;
+      --muted:  #6b7280;
+    }
+
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #f0f4ff;
-      color: #1e1e2e;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
       min-height: 100vh;
+      font-size: 16px;
     }
 
     header {
-      background: linear-gradient(135deg, #4f46e5, #7c3aed);
+      background: linear-gradient(135deg, var(--indigo), var(--violet));
       color: white;
-      padding: 2rem 1.5rem;
+      padding: 1.8rem 1.2rem 1.4rem;
       text-align: center;
-      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
     }
+    header h1 { font-size: 1.6rem; font-weight: 800; }
+    header p  { margin-top: .3rem; opacity: .85; font-size: .95rem; }
 
-    header h1 { font-size: 2rem; letter-spacing: 0.5px; }
-    header p  { margin-top: 0.4rem; opacity: 0.85; font-size: 1rem; }
+    .prog-wrap  { background: rgba(255,255,255,.25); border-radius: 9999px; height: 8px; width: 240px; margin: 1rem auto 0; overflow: hidden; }
+    .prog-bar   { height: 100%; width: 0%; background: #a5f3fc; border-radius: 9999px; transition: width .4s; }
+    .prog-label { font-size: .78rem; margin-top: .35rem; opacity: .9; }
 
-    .progress-bar-wrap {
-      background: rgba(255,255,255,0.25);
-      border-radius: 9999px;
-      height: 8px;
-      width: 260px;
-      margin: 1rem auto 0;
-      overflow: hidden;
-    }
-    .progress-bar {
-      height: 100%;
-      width: 0%;
-      background: #a5f3fc;
-      border-radius: 9999px;
-      transition: width 0.4s ease;
-    }
-    .progress-label { font-size: 0.8rem; margin-top: 0.3rem; opacity: 0.9; }
-
-    main {
-      max-width: 820px;
-      margin: 2rem auto;
-      padding: 0 1rem 3rem;
-    }
+    main { max-width: 760px; margin: 0 auto; padding: 1.5rem 1rem 4rem; }
 
     .section-title {
-      font-size: 1.2rem;
-      font-weight: 700;
-      color: #4f46e5;
-      margin: 2rem 0 1rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
+      font-size: 1rem; font-weight: 700; color: var(--indigo);
+      margin: 2rem 0 .8rem;
+      display: flex; align-items: center; gap: .4rem;
     }
 
-    /* ── Exercise cards ── */
     .card {
-      background: white;
-      border-radius: 14px;
-      padding: 1.4rem 1.6rem;
+      background: var(--card);
+      border-radius: 16px;
+      padding: 1.4rem 1.4rem 1.2rem;
       margin-bottom: 1.2rem;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
-      border-left: 5px solid #4f46e5;
-      transition: transform 0.15s, box-shadow 0.15s;
+      box-shadow: 0 2px 10px rgba(0,0,0,.07);
+      border-left: 5px solid var(--indigo);
     }
-    .card:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,0.1); }
+    .badge {
+      display: inline-block; font-size: .68rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .4px;
+      padding: 2px 9px; border-radius: 9999px; margin-bottom: .7rem;
+    }
+    .b-reading { background:#dbeafe; color:#1d4ed8; }
+    .b-grammar { background:#ede9fe; color:#6d28d9; }
+    .b-error   { background:#fef3c7; color:#92400e; }
+    .b-order   { background:#d1fae5; color:#065f46; }
+    .b-write   { background:#fce7f3; color:#9d174d; }
 
-    .card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.8rem; }
-    .card .badge {
-      display: inline-block;
-      font-size: 0.7rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      padding: 2px 8px;
-      border-radius: 9999px;
-      margin-bottom: 0.6rem;
-    }
-    .badge-vocab   { background: #ede9fe; color: #6d28d9; }
-    .badge-grammar { background: #dbeafe; color: #1d4ed8; }
-    .badge-reading { background: #d1fae5; color: #065f46; }
-    .badge-listen  { background: #fef3c7; color: #92400e; }
+    .card h3 { font-size: 1rem; font-weight: 700; margin-bottom: .5rem; line-height: 1.4; }
+    .card p  { font-size: .93rem; line-height: 1.65; color: #374151; }
 
-    /* Multiple choice */
-    .options { list-style: none; margin-top: 0.6rem; }
-    .options li {
-      margin: 0.4rem 0;
+    .passage {
+      background: #f8faff;
+      border: 1px solid #e0e7ff;
+      border-radius: 10px;
+      padding: 1rem 1.1rem;
+      margin: .8rem 0;
+      font-size: .9rem;
+      line-height: 1.75;
+      color: #374151;
+      font-style: italic;
     }
+
+    .options { list-style: none; margin-top: .7rem; display: flex; flex-direction: column; gap: .45rem; }
     .options li label {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      cursor: pointer;
-      padding: 0.5rem 0.8rem;
-      border-radius: 8px;
+      display: flex; align-items: flex-start; gap: .7rem;
+      padding: .65rem .9rem;
+      border-radius: 10px;
       border: 2px solid #e5e7eb;
-      transition: border-color 0.2s, background 0.2s;
-      user-select: none;
+      cursor: pointer;
+      font-size: .9rem; line-height: 1.4;
+      transition: border-color .18s, background .18s;
+      -webkit-tap-highlight-color: transparent;
     }
-    .options li label:hover { border-color: #4f46e5; background: #f5f3ff; }
-    .options li input[type="radio"] { accent-color: #4f46e5; width: 16px; height: 16px; }
+    .options li label:hover,
+    .options li label:active { border-color: var(--indigo); background: #f5f3ff; }
+    .options li input[type="radio"] { accent-color: var(--indigo); width: 18px; height: 18px; flex-shrink: 0; margin-top: 1px; }
 
-    /* Fill-in-the-blank */
-    .blank-input {
-      border: none;
-      border-bottom: 2px solid #4f46e5;
-      outline: none;
-      font-size: 1rem;
-      width: 120px;
-      padding: 2px 4px;
-      background: transparent;
-      color: #1e1e2e;
-      text-align: center;
-      transition: border-color 0.2s;
+    .sentence-row {
+      display: flex; align-items: center; gap: .6rem;
+      padding: .6rem .8rem; border-radius: 10px;
+      border: 2px solid #e5e7eb;
+      margin: .4rem 0; font-size: .9rem;
+      cursor: pointer; transition: border-color .18s, background .18s;
+      -webkit-tap-highlight-color: transparent;
     }
-    .blank-input:focus { border-color: #7c3aed; }
+    .sentence-row:hover,
+    .sentence-row:active { border-color: #f59e0b; background: #fffbeb; }
+    .sentence-row.selected { border-color: #f59e0b; background: #fffbeb; }
+    .sentence-row.correct  { border-color: var(--green); background: #ecfdf5; cursor: default; }
+    .sentence-row.wrong    { border-color: var(--red);   background: #fef2f2; }
+    .sentence-row .num { font-weight: 700; color: var(--muted); min-width: 1.2rem; }
 
-    /* Drag-and-drop word order */
-    .word-bank {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin: 0.8rem 0;
+    .word-bank-tap {
+      display: flex; flex-wrap: wrap; gap: .5rem; margin: .8rem 0 .4rem;
     }
-    .word-chip {
-      background: #ede9fe;
-      color: #4f46e5;
-      padding: 0.3rem 0.8rem;
-      border-radius: 9999px;
-      font-size: 0.9rem;
-      cursor: grab;
-      user-select: none;
+    .tap-chip {
+      background: #ede9fe; color: var(--indigo);
+      padding: .4rem .9rem; border-radius: 9999px;
+      font-size: .9rem; cursor: pointer; user-select: none;
       border: 2px solid transparent;
-      transition: background 0.2s, transform 0.1s;
+      transition: background .15s, transform .1s;
+      -webkit-tap-highlight-color: transparent;
     }
-    .word-chip:active { cursor: grabbing; transform: scale(1.05); }
-    .word-chip.placed { background: #4f46e5; color: white; cursor: default; }
-    .drop-zone {
-      min-height: 44px;
+    .tap-chip:active { transform: scale(.95); }
+    .tap-chip.used   { background: #c7d2fe; color: #4338ca; opacity: .45; cursor: default; }
+
+    .answer-row {
+      min-height: 48px;
       border: 2px dashed #a5b4fc;
-      border-radius: 8px;
-      padding: 0.4rem 0.6rem;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-      align-items: center;
-      color: #a5b4fc;
-      font-size: 0.85rem;
+      border-radius: 10px;
+      padding: .5rem .7rem;
+      display: flex; flex-wrap: wrap; gap: .4rem; align-items: center;
+      color: #a5b4fc; font-size: .85rem; margin-bottom: .3rem;
+      transition: border-color .18s;
     }
-    .drop-zone.drag-over { border-color: #4f46e5; background: #f5f3ff; }
+    .answer-row.has-words { border-color: var(--indigo); color: var(--text); }
 
-    /* Matching */
-    .match-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.5rem;
-      margin-top: 0.6rem;
+    .placed-chip {
+      background: var(--indigo); color: white;
+      padding: .4rem .9rem; border-radius: 9999px;
+      font-size: .9rem; cursor: pointer; user-select: none;
+      -webkit-tap-highlight-color: transparent;
+      transition: transform .1s;
     }
-    .match-item {
-      padding: 0.5rem 0.8rem;
-      border-radius: 8px;
+    .placed-chip:active { transform: scale(.95); }
+
+    .match-columns {
+      display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; margin-top: .7rem;
+    }
+    .match-col-label { font-size: .75rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .5px; margin-bottom: .3rem; text-align: center; }
+    .match-btn {
+      display: block; width: 100%;
+      padding: .65rem .5rem;
+      border-radius: 10px;
       border: 2px solid #e5e7eb;
-      cursor: pointer;
-      font-size: 0.9rem;
-      text-align: center;
-      transition: border-color 0.2s, background 0.2s;
+      background: white; cursor: pointer;
+      font-size: .88rem; text-align: center; font-weight: 600;
+      transition: border-color .15s, background .15s, transform .1s;
+      -webkit-tap-highlight-color: transparent;
+      margin-bottom: .45rem;
     }
-    .match-item:hover { border-color: #4f46e5; }
-    .match-item.selected { background: #ede9fe; border-color: #4f46e5; }
-    .match-item.matched  { background: #d1fae5; border-color: #10b981; color: #065f46; cursor: default; }
-    .match-item.wrong    { background: #fee2e2; border-color: #ef4444; }
+    .match-btn:active { transform: scale(.97); }
+    .match-btn:hover  { border-color: var(--indigo); background: #f5f3ff; }
+    .match-btn.selected { border-color: var(--indigo); background: #ede9fe; color: var(--indigo); }
+    .match-btn.matched  { border-color: var(--green);  background: #ecfdf5; color: var(--green); cursor: default; }
+    .match-btn.wrong    { border-color: var(--red);    background: #fef2f2; }
 
-    /* Buttons */
-    .btn {
-      margin-top: 1rem;
-      padding: 0.5rem 1.2rem;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 0.9rem;
-      font-weight: 600;
-      transition: background 0.2s, transform 0.1s;
+    .reflect-area {
+      width: 100%; min-height: 100px;
+      border: 2px solid #e5e7eb; border-radius: 10px;
+      padding: .7rem .9rem; font-size: .9rem;
+      font-family: inherit; resize: vertical;
+      transition: border-color .2s;
+      outline: none; color: var(--text);
     }
-    .btn:active { transform: scale(0.97); }
-    .btn-primary   { background: #4f46e5; color: white; }
+    .reflect-area:focus { border-color: var(--indigo); }
+    .reflect-hint { font-size: .8rem; color: var(--muted); margin-top: .4rem; }
+
+    .btn-row { display: flex; gap: .6rem; flex-wrap: wrap; margin-top: .9rem; }
+    .btn {
+      padding: .55rem 1.2rem; border: none; border-radius: 9px;
+      cursor: pointer; font-size: .88rem; font-weight: 700;
+      transition: background .18s, transform .1s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .btn:active { transform: scale(.97); }
+    .btn-primary   { background: var(--indigo); color: white; }
     .btn-primary:hover { background: #4338ca; }
-    .btn-secondary { background: #e5e7eb; color: #374151; }
-    .btn-secondary:hover { background: #d1d5db; }
+    .btn-ghost     { background: #e5e7eb; color: #374151; }
+    .btn-ghost:hover { background: #d1d5db; }
 
     .feedback {
-      margin-top: 0.7rem;
-      padding: 0.5rem 0.9rem;
-      border-radius: 8px;
-      font-size: 0.9rem;
-      display: none;
+      margin-top: .8rem; padding: .6rem 1rem;
+      border-radius: 9px; font-size: .88rem; display: none;
     }
-    .feedback.correct { background: #d1fae5; color: #065f46; display: block; }
-    .feedback.wrong   { background: #fee2e2; color: #991b1b; display: block; }
-    .feedback.info    { background: #dbeafe; color: #1e40af; display: block; }
+    .feedback.ok   { background: #ecfdf5; color: #065f46; display: block; }
+    .feedback.bad  { background: #fef2f2; color: #991b1b; display: block; }
+    .feedback.info { background: #eff6ff; color: #1e40af; display: block; }
 
-    /* Score */
     .score-box {
-      background: white;
-      border-radius: 14px;
-      padding: 1.6rem;
-      text-align: center;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      background: white; border-radius: 16px;
+      padding: 1.8rem; text-align: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,.07);
       margin-top: 2rem;
     }
-    .score-box h2 { color: #4f46e5; font-size: 1.4rem; }
-    .score-num { font-size: 3rem; font-weight: 800; color: #4f46e5; }
+    .score-box h2 { color: var(--indigo); font-size: 1.2rem; }
+    .score-num    { font-size: 3.2rem; font-weight: 800; color: var(--indigo); line-height: 1.1; }
+    .score-msg    { color: var(--muted); margin-top: .4rem; font-size: .9rem; }
   </style>
 </head>
 <body>
 
 <header>
-  <h1>🎓 Mi Clase de Inglés</h1>
-  <p>Ejercicios y actividades interactivas</p>
-  <div class="progress-bar-wrap"><div class="progress-bar" id="progressBar"></div></div>
-  <p class="progress-label" id="progressLabel">0 / 5 completados</p>
+  <h1>📖 English Class</h1>
+  <p>Ejercicios conceptuales e integrativos</p>
+  <div class="prog-wrap"><div class="prog-bar" id="progBar"></div></div>
+  <p class="prog-label" id="progLabel">0 / 6 completados</p>
 </header>
 
 <main>
 
-  <!-- ── 1. Multiple Choice ── -->
-  <div class="section-title">📝 Ejercicios</div>
+  <div class="section-title">📚 Comprensión e inferencia</div>
 
-  <div class="card" id="ex1">
-    <span class="badge badge-vocab">Vocabulario</span>
-    <h3>1. What is the correct translation of "mariposa"?</h3>
+  <div class="card">
+    <span class="badge b-reading">Reading &amp; Inference</span>
+    <h3>1. Lee el texto y responde según lo que se <em>implica</em>, no solo lo que se dice.</h3>
+    <div class="passage">
+      "Maya always arrived at the office before anyone else. Her desk was covered in sticky notes,
+      color-coded folders, and three different planners. When the power went out one afternoon
+      and her computer crashed, she was the only one who kept working — she had everything
+      written down by hand."
+    </div>
+    <p>What can we <strong>infer</strong> about Maya?</p>
     <ul class="options">
-      <li><label><input type="radio" name="q1" value="a"> Butterfly</label></li>
-      <li><label><input type="radio" name="q1" value="b"> Dragonfly</label></li>
-      <li><label><input type="radio" name="q1" value="c"> Firefly</label></li>
-      <li><label><input type="radio" name="q1" value="d"> Moth</label></li>
+      <li><label><input type="radio" name="q1" value="a"> She does not trust technology and avoids it completely.</label></li>
+      <li><label><input type="radio" name="q1" value="b"> She is highly organized and prepared for unexpected situations.</label></li>
+      <li><label><input type="radio" name="q1" value="c"> She prefers working alone and dislikes colleagues.</label></li>
+      <li><label><input type="radio" name="q1" value="d"> She is the manager of the office.</label></li>
     </ul>
-    <button class="btn btn-primary" onclick="checkMC('q1','a','fb1')">Verificar</button>
-    <button class="btn btn-secondary" onclick="resetMC('q1','fb1')">Reintentar</button>
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="checkMC('q1','b','fb1','ex1')">Verificar</button>
+      <button class="btn btn-ghost"   onclick="resetMC('q1','fb1')">Reintentar</button>
+    </div>
     <div class="feedback" id="fb1"></div>
   </div>
 
-  <div class="card" id="ex2">
-    <span class="badge badge-grammar">Gramática</span>
-    <h3>2. Choose the correct verb form:</h3>
-    <p style="margin-bottom:0.6rem">She _____ to school every day.</p>
+  <div class="section-title">🧩 Gramática en contexto</div>
+
+  <div class="card">
+    <span class="badge b-grammar">Grammar in Context</span>
+    <h3>2. Choose the option that best completes the paragraph with correct grammar <em>and</em> logic.</h3>
+    <div class="passage">
+      "The new library _____ in the city center last year. Since then, thousands of students
+      _____ it every week to study and borrow books. The director says it _____ even more
+      programs next semester."
+    </div>
     <ul class="options">
-      <li><label><input type="radio" name="q2" value="a"> go</label></li>
-      <li><label><input type="radio" name="q2" value="b"> goes</label></li>
-      <li><label><input type="radio" name="q2" value="c"> going</label></li>
-      <li><label><input type="radio" name="q2" value="d"> gone</label></li>
+      <li><label><input type="radio" name="q2" value="a"> opened / have visited / will offer</label></li>
+      <li><label><input type="radio" name="q2" value="b"> has opened / visited / offers</label></li>
+      <li><label><input type="radio" name="q2" value="c"> was opening / are visiting / offered</label></li>
+      <li><label><input type="radio" name="q2" value="d"> opens / had visited / is offering</label></li>
     </ul>
-    <button class="btn btn-primary" onclick="checkMC('q2','b','fb2')">Verificar</button>
-    <button class="btn btn-secondary" onclick="resetMC('q2','fb2')">Reintentar</button>
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="checkMC('q2','a','fb2','ex2')">Verificar</button>
+      <button class="btn btn-ghost"   onclick="resetMC('q2','fb2')">Reintentar</button>
+    </div>
     <div class="feedback" id="fb2"></div>
   </div>
 
-  <!-- ── 2. Fill in the blank ── -->
-  <div class="card" id="ex3">
-    <span class="badge badge-grammar">Completar</span>
-    <h3>3. Fill in the blank with the correct article:</h3>
-    <p style="line-height:2">
-      I saw <input class="blank-input" id="b1" placeholder="a / an / the" />
-      elephant at the zoo. It was
-      <input class="blank-input" id="b2" placeholder="a / an / the" />
-      most beautiful animal.
-    </p>
-    <button class="btn btn-primary" onclick="checkBlanks()">Verificar</button>
-    <button class="btn btn-secondary" onclick="resetBlanks()">Reintentar</button>
+  <div class="section-title">🔍 Corrección de errores</div>
+
+  <div class="card" id="ex3card">
+    <span class="badge b-error">Error Correction</span>
+    <h3>3. Identify the sentence that contains a grammatical error.</h3>
+    <p style="margin-bottom:.7rem;font-size:.88rem;color:var(--muted)">Toca la oración incorrecta.</p>
+    <div class="sentence-row" id="sr1" onclick="checkError('sr1','fb3','ex3')">
+      <span class="num">A</span><span>She has been living in Madrid since 2015.</span>
+    </div>
+    <div class="sentence-row" id="sr2" onclick="checkError('sr2','fb3','ex3')">
+      <span class="num">B</span><span>If I would have more time, I would travel more often.</span>
+    </div>
+    <div class="sentence-row" id="sr3" onclick="checkError('sr3','fb3','ex3')">
+      <span class="num">C</span><span>They weren't able to finish the project on time.</span>
+    </div>
+    <div class="sentence-row" id="sr4" onclick="checkError('sr4','fb3','ex3')">
+      <span class="num">D</span><span>By 2030, scientists will have developed new vaccines.</span>
+    </div>
     <div class="feedback" id="fb3"></div>
   </div>
 
-  <!-- ── 3. Word order ── -->
-  <div class="card" id="ex4">
-    <span class="badge badge-grammar">Orden</span>
-    <h3>4. Arrange the words to form a correct sentence:</h3>
-    <div class="word-bank" id="wordBank"></div>
-    <p style="font-size:0.85rem;color:#6b7280;margin-bottom:0.4rem">Arrastra las palabras aquí:</p>
-    <div class="drop-zone" id="dropZone">Suelta las palabras aquí…</div>
-    <button class="btn btn-primary" onclick="checkOrder()">Verificar</button>
-    <button class="btn btn-secondary" onclick="resetOrder()">Reintentar</button>
+  <div class="section-title">🔀 Orden lógico de ideas</div>
+
+  <div class="card">
+    <span class="badge b-order">Sentence Structure</span>
+    <h3>4. Tap the words in order to build a coherent academic sentence.</h3>
+    <p style="font-size:.85rem;color:var(--muted);margin-bottom:.5rem">Toca en orden → aparecen arriba. Toca una colocada para quitarla.</p>
+    <div class="word-bank-tap" id="wordBank"></div>
+    <div class="answer-row"    id="answerRow">Tu oración aparecerá aquí…</div>
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="checkOrder('fb4','ex4')">Verificar</button>
+      <button class="btn btn-ghost"   onclick="resetOrder()">Reintentar</button>
+    </div>
     <div class="feedback" id="fb4"></div>
   </div>
 
-  <!-- ── 4. Matching ── -->
-  <div class="card" id="ex5">
-    <span class="badge badge-vocab">Emparejar</span>
-    <h3>5. Match each word with its translation:</h3>
-    <div class="match-grid" id="matchGrid"></div>
-    <button class="btn btn-secondary" onclick="resetMatch()">Reintentar</button>
+  <div class="section-title">🔗 Empareja conceptos</div>
+
+  <div class="card">
+    <span class="badge b-grammar">Conceptual Matching</span>
+    <h3>5. Match each discourse marker with its function.</h3>
+    <p style="font-size:.85rem;color:var(--muted);margin-bottom:.6rem">Selecciona uno de cada columna para emparejar.</p>
+    <div class="match-columns">
+      <div>
+        <div class="match-col-label">Marker</div>
+        <div id="colLeft"></div>
+      </div>
+      <div>
+        <div class="match-col-label">Function</div>
+        <div id="colRight"></div>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-ghost" onclick="resetMatch()">Reintentar</button>
+    </div>
     <div class="feedback" id="fb5"></div>
   </div>
 
-  <!-- Score -->
+  <div class="section-title">✍️ Reflexión escrita</div>
+
+  <div class="card">
+    <span class="badge b-write">Critical Writing</span>
+    <h3>6. Short response (3–5 sentences in English):</h3>
+    <div class="passage" style="font-style:normal;font-weight:600">
+      "Technology has made it easier to learn a language, but harder to actually use it."<br>
+      Do you agree or disagree? Give at least two reasons.
+    </div>
+    <textarea class="reflect-area" id="reflectText" placeholder="Write your response here…"></textarea>
+    <p class="reflect-hint">Mínimo 3 oraciones · Usa conectores: <em>however, therefore, for instance, on the other hand…</em></p>
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="checkReflect()">Enviar</button>
+      <button class="btn btn-ghost"   onclick="resetReflect()">Borrar</button>
+    </div>
+    <div class="feedback" id="fb6"></div>
+  </div>
+
   <div class="score-box">
-    <h2>Tu puntuación</h2>
-    <div class="score-num" id="scoreNum">0 / 5</div>
-    <p style="color:#6b7280;margin-top:0.4rem">¡Completa todos los ejercicios!</p>
+    <h2>Tu progreso</h2>
+    <div class="score-num" id="scoreNum">0 / 6</div>
+    <p class="score-msg" id="scoreMsg">¡Completa todos los ejercicios!</p>
   </div>
 
 </main>
 
 <script>
-// ── Progress & Score ─────────────────────────────────────────────────────────
-const completed = new Set();
+const done = new Set();
 function markDone(id) {
-  completed.add(id);
-  updateProgress();
+  done.add(id);
+  const n = done.size;
+  document.getElementById('progBar').style.width   = (n / 6 * 100) + '%';
+  document.getElementById('progLabel').textContent = n + ' / 6 completados';
+  document.getElementById('scoreNum').textContent  = n + ' / 6';
+  const msgs = ['','','¡Vas bien!','¡Mitad del camino!','¡Casi terminas!','¡Un ejercicio más!','🎉 ¡Excelente trabajo!'];
+  document.getElementById('scoreMsg').textContent  = msgs[n] || '';
 }
-function updateProgress() {
-  const n = completed.size;
-  document.getElementById('progressBar').style.width = (n / 5 * 100) + '%';
-  document.getElementById('progressLabel').textContent = n + ' / 5 completados';
-  document.getElementById('scoreNum').textContent = n + ' / 5';
+function fb(id, type, msg) {
+  const el = document.getElementById(id);
+  el.className = 'feedback ' + type;
+  el.textContent = msg;
 }
 
-// ── 1. Multiple Choice ────────────────────────────────────────────────────────
-function checkMC(name, correct, fbId) {
+function checkMC(name, correct, fbId, exId) {
   const sel = document.querySelector(`input[name="${name}"]:checked`);
-  const fb  = document.getElementById(fbId);
-  if (!sel) { fb.className = 'feedback info'; fb.textContent = '⚠️ Selecciona una opción primero.'; return; }
+  if (!sel) { fb(fbId, 'info', '⚠️ Selecciona una opción primero.'); return; }
   if (sel.value === correct) {
-    fb.className = 'feedback correct';
-    fb.textContent = '✅ ¡Correcto! Muy bien.';
-    markDone(name);
+    const explanations = {
+      q1: '✅ Correcto. La evidencia (sticky notes, planners, notas escritas a mano) apoya la inferencia de que es muy organizada y prevé imprevistos — no se dice explícitamente.',
+      q2: '✅ Correcto. "opened" (simple past para evento puntual), "have visited" (present perfect para acción repetida desde entonces), "will offer" (futuro para plan anunciado).',
+    };
+    fb(fbId, 'ok', explanations[name]);
     document.querySelectorAll(`input[name="${name}"]`).forEach(r => r.disabled = true);
+    markDone(exId || name);
   } else {
-    fb.className = 'feedback wrong';
-    fb.textContent = '❌ Incorrecto. ¡Inténtalo de nuevo!';
+    fb(fbId, 'bad', '❌ No es la mejor opción. Analiza cada parte del texto con cuidado.');
   }
 }
 function resetMC(name, fbId) {
@@ -338,154 +389,155 @@ function resetMC(name, fbId) {
   document.getElementById(fbId).className = 'feedback';
 }
 
-// ── 2. Fill in the blank ─────────────────────────────────────────────────────
-function checkBlanks() {
-  const b1 = document.getElementById('b1').value.trim().toLowerCase();
-  const b2 = document.getElementById('b2').value.trim().toLowerCase();
-  const fb = document.getElementById('fb3');
-  if (!b1 || !b2) { fb.className = 'feedback info'; fb.textContent = '⚠️ Completa los dos espacios.'; return; }
-  if (b1 === 'an' && b2 === 'the') {
-    fb.className = 'feedback correct';
-    fb.textContent = '✅ ¡Correcto! "an elephant" y "the most…"';
-    markDone('blanks');
-    document.getElementById('b1').disabled = true;
-    document.getElementById('b2').disabled = true;
+const correctError = 'sr2';
+let errorLocked = false;
+function checkError(id, fbId, exId) {
+  if (errorLocked) return;
+  ['sr1','sr2','sr3','sr4'].forEach(r => document.getElementById(r).classList.remove('selected'));
+  const el = document.getElementById(id);
+  el.classList.add('selected');
+  if (id === correctError) {
+    el.classList.remove('selected');
+    el.classList.add('correct');
+    fb(fbId, 'ok', '✅ Correcto. "If I would have…" es incorrecto — la forma correcta del 2nd conditional es "If I had more time, I would travel more often." El "would" no va en la cláusula con "if".');
+    errorLocked = true;
+    markDone(exId);
   } else {
-    fb.className = 'feedback wrong';
-    fb.textContent = `❌ Revisa: "${b1}" / "${b2}". Pista: usa "an" antes de vocal y "the" para el superlativo.`;
+    el.classList.add('wrong');
+    setTimeout(() => { el.classList.remove('wrong','selected'); }, 700);
+    fb(fbId, 'bad', '❌ Esa oración es correcta. Busca el error condicional.');
   }
 }
-function resetBlanks() {
-  ['b1','b2'].forEach(id => { const el = document.getElementById(id); el.value = ''; el.disabled = false; });
-  document.getElementById('fb3').className = 'feedback';
-}
 
-// ── 3. Word Order ─────────────────────────────────────────────────────────────
-const correctOrder = ['every', 'morning', 'I', 'drink', 'coffee'];
-let dragWord = null;
-
+const correctSentence = ['Despite','initial','setbacks,','researchers','ultimately','published','groundbreaking','findings.'];
+let placed = [];
 function buildWordBank() {
-  const shuffled = [...correctOrder].sort(() => Math.random() - 0.5);
+  placed = [];
+  const shuffled = [...correctSentence].sort(() => Math.random() - 0.5);
   const bank = document.getElementById('wordBank');
   bank.innerHTML = '';
-  shuffled.forEach(w => {
+  shuffled.forEach((w, i) => {
     const chip = document.createElement('div');
-    chip.className = 'word-chip';
+    chip.className = 'tap-chip';
     chip.textContent = w;
-    chip.draggable = true;
-    chip.addEventListener('dragstart', () => { dragWord = w; chip.style.opacity = '0.4'; });
-    chip.addEventListener('dragend',   () => { chip.style.opacity = '1'; });
+    chip.dataset.idx = i;
+    chip.addEventListener('click', () => tapWord(chip, w));
     bank.appendChild(chip);
   });
-
-  const dz = document.getElementById('dropZone');
-  dz.innerHTML = 'Suelta las palabras aquí…';
-  dz.addEventListener('dragover',  e => { e.preventDefault(); dz.classList.add('drag-over'); });
-  dz.addEventListener('dragleave', () => dz.classList.remove('drag-over'));
-  dz.addEventListener('drop', e => {
-    e.preventDefault();
-    dz.classList.remove('drag-over');
-    if (!dragWord) return;
-    const existing = [...bank.querySelectorAll('.word-chip')].find(c => c.textContent === dragWord);
-    if (existing) existing.remove();
-    const chip = document.createElement('div');
-    chip.className = 'word-chip placed';
-    chip.textContent = dragWord;
-    chip.draggable = true;
-    chip.addEventListener('dragstart', () => { dragWord = dragWord; chip.style.opacity='0.4'; });
-    chip.addEventListener('dragend', () => chip.style.opacity='1');
-    chip.addEventListener('click', () => {
-      const w2 = chip.textContent;
-      chip.remove();
-      const c2 = document.createElement('div');
-      c2.className='word-chip'; c2.textContent=w2; c2.draggable=true;
-      c2.addEventListener('dragstart', ()=>{ dragWord=w2; c2.style.opacity='0.4'; });
-      c2.addEventListener('dragend', ()=>c2.style.opacity='1');
-      bank.appendChild(c2);
-      if (dz.children.length===0) dz.textContent='Suelta las palabras aquí…';
-    });
-    if (dz.textContent === 'Suelta las palabras aquí…') dz.textContent = '';
-    dz.appendChild(chip);
-    dragWord = null;
+  renderAnswer();
+}
+function tapWord(chip, word) {
+  if (chip.classList.contains('used')) return;
+  chip.classList.add('used');
+  placed.push({ word, chip });
+  renderAnswer();
+}
+function renderAnswer() {
+  const row = document.getElementById('answerRow');
+  row.innerHTML = '';
+  if (placed.length === 0) { row.textContent = 'Tu oración aparecerá aquí…'; row.classList.remove('has-words'); return; }
+  row.classList.add('has-words');
+  placed.forEach((item, i) => {
+    const p = document.createElement('div');
+    p.className = 'placed-chip';
+    p.textContent = item.word;
+    p.addEventListener('click', () => removePlaced(i));
+    row.appendChild(p);
   });
 }
-
-function checkOrder() {
-  const dz = document.getElementById('dropZone');
-  const words = [...dz.querySelectorAll('.word-chip')].map(c => c.textContent);
-  const fb = document.getElementById('fb4');
-  if (words.length === 0) { fb.className = 'feedback info'; fb.textContent = '⚠️ Arrastra las palabras primero.'; return; }
-  if (JSON.stringify(words) === JSON.stringify(correctOrder)) {
-    fb.className = 'feedback correct';
-    fb.textContent = '✅ ¡Correcto! "Every morning I drink coffee."';
-    markDone('order');
+function removePlaced(i) {
+  const { chip } = placed[i];
+  chip.classList.remove('used');
+  placed.splice(i, 1);
+  renderAnswer();
+}
+function checkOrder(fbId, exId) {
+  if (placed.length === 0) { fb(fbId, 'info', '⚠️ Toca las palabras para construir la oración.'); return; }
+  if (JSON.stringify(placed.map(p => p.word)) === JSON.stringify(correctSentence)) {
+    fb(fbId, 'ok', '✅ Correcto. "Despite initial setbacks, researchers ultimately published groundbreaking findings." — nota el uso de "despite" + sustantivo y el adverbio "ultimately" para marcar el contraste y el resultado final.');
+    document.querySelectorAll('.tap-chip').forEach(c => c.style.pointerEvents='none');
+    document.querySelectorAll('.placed-chip').forEach(c => c.style.cursor='default');
+    markDone(exId);
   } else {
-    fb.className = 'feedback wrong';
-    fb.textContent = '❌ El orden no es correcto. ¡Inténtalo de nuevo!';
+    fb(fbId, 'bad', '❌ El orden no es correcto. Piensa en: conjunción + frase nominal → sujeto → adverbio → verbo → objeto.');
   }
 }
-function resetOrder() {
-  buildWordBank();
-  document.getElementById('fb4').className = 'feedback';
-}
+function resetOrder() { buildWordBank(); document.getElementById('fb4').className = 'feedback'; }
 buildWordBank();
 
-// ── 4. Matching ───────────────────────────────────────────────────────────────
 const matchPairs = [
-  { en: 'Dog',    es: 'Perro' },
-  { en: 'House',  es: 'Casa'  },
-  { en: 'Book',   es: 'Libro' },
-  { en: 'Water',  es: 'Agua'  },
+  { left: 'However',      right: 'Contrast / concession' },
+  { left: 'Therefore',    right: 'Consequence / result'  },
+  { left: 'For instance', right: 'Giving an example'     },
+  { left: 'Furthermore',  right: 'Adding information'    },
 ];
-let firstSel = null;
-let matchedCount = 0;
-
+let mLeft = null, mRight = null, mMatched = 0;
 function buildMatch() {
-  matchedCount = 0;
-  firstSel = null;
-  const grid = document.getElementById('matchGrid');
-  grid.innerHTML = '';
-  const enWords = matchPairs.map(p => p.en).sort(() => Math.random() - 0.5);
-  const esWords = matchPairs.map(p => p.es).sort(() => Math.random() - 0.5);
-  [...enWords, ...esWords].forEach((word, i) => {
-    const div = document.createElement('div');
-    div.className = 'match-item';
-    div.textContent = word;
-    div.dataset.word = word;
-    div.dataset.lang = i < enWords.length ? 'en' : 'es';
-    div.addEventListener('click', () => onMatchClick(div));
-    grid.appendChild(div);
-  });
+  mLeft = null; mRight = null; mMatched = 0;
+  const lShuf = [...matchPairs].sort(() => Math.random() - 0.5);
+  const rShuf = [...matchPairs].sort(() => Math.random() - 0.5);
+  const colL = document.getElementById('colLeft');
+  const colR = document.getElementById('colRight');
+  colL.innerHTML = ''; colR.innerHTML = '';
+  lShuf.forEach(p => colL.appendChild(makeMatchBtn(p.left,  'L', p)));
+  rShuf.forEach(p => colR.appendChild(makeMatchBtn(p.right, 'R', p)));
   document.getElementById('fb5').className = 'feedback';
 }
-
-function onMatchClick(el) {
-  if (el.classList.contains('matched')) return;
-  if (firstSel === el) { el.classList.remove('selected'); firstSel = null; return; }
-  if (!firstSel) { el.classList.add('selected'); firstSel = el; return; }
-  const a = firstSel, b = el;
-  const pair = matchPairs.find(p =>
-    (p.en === a.dataset.word && p.es === b.dataset.word) ||
-    (p.es === a.dataset.word && p.en === b.dataset.word)
-  );
-  if (pair) {
-    [a, b].forEach(x => { x.classList.remove('selected'); x.classList.add('matched'); });
-    matchedCount++;
-    if (matchedCount === matchPairs.length) {
-      const fb = document.getElementById('fb5');
-      fb.className = 'feedback correct';
-      fb.textContent = '✅ ¡Perfecto! Emparejaste todo correctamente.';
-      markDone('match');
-    }
-  } else {
-    [a, b].forEach(x => { x.classList.remove('selected'); x.classList.add('wrong'); });
-    setTimeout(() => [a, b].forEach(x => x.classList.remove('wrong')), 700);
-  }
-  firstSel = null;
+function makeMatchBtn(label, side, pairRef) {
+  const btn = document.createElement('button');
+  btn.className = 'match-btn';
+  btn.textContent = label;
+  btn.dataset.side  = side;
+  btn.dataset.left  = pairRef.left;
+  btn.dataset.right = pairRef.right;
+  btn.addEventListener('click', () => onMatch(btn));
+  return btn;
 }
-
+function onMatch(btn) {
+  if (btn.classList.contains('matched')) return;
+  if (btn.dataset.side === 'L') {
+    if (mLeft) mLeft.classList.remove('selected');
+    mLeft = btn; btn.classList.add('selected');
+  } else {
+    if (mRight) mRight.classList.remove('selected');
+    mRight = btn; btn.classList.add('selected');
+  }
+  if (mLeft && mRight) {
+    if (mLeft.dataset.left === mRight.dataset.left) {
+      [mLeft, mRight].forEach(b => { b.classList.remove('selected'); b.classList.add('matched'); });
+      mMatched++;
+      if (mMatched === matchPairs.length) {
+        fb('fb5', 'ok', '✅ ¡Perfecto! Conoces bien los conectores del discurso — son clave para estructurar ideas en inglés académico.');
+        markDone('match');
+      }
+    } else {
+      const a = mLeft, b = mRight;
+      [a, b].forEach(x => { x.classList.remove('selected'); x.classList.add('wrong'); });
+      setTimeout(() => [a, b].forEach(x => x.classList.remove('wrong')), 650);
+    }
+    mLeft = null; mRight = null;
+  }
+}
 function resetMatch() { buildMatch(); }
 buildMatch();
-</script>
+
+function checkReflect() {
+  const text = document.getElementById('reflectText').value.trim();
+  const sentences = text.split(/[.!?]+/).filter(s => s.trim().length > 3);
+  const connectors = ['however','therefore','for instance','furthermore','on the other hand','although','because','in addition','as a result','nevertheless'];
+  const used = connectors.filter(c => text.toLowerCase().includes(c));
+  if (text.length < 30 || sentences.length < 2) { fb('fb6', 'info', '⚠️ Escribe al menos 3 oraciones completas en inglés.'); return; }
+  let msg = '✅ Respuesta enviada. ';
+  if (used.length >= 2) msg += `Excelente uso de conectores: ${used.slice(0,3).map(c=>'"'+c+'"').join(', ')}.`;
+  else if (used.length === 1) msg += `Usaste "${used[0]}" — intenta agregar uno más (however, therefore, for instance…).`;
+  else msg += 'Consejo: añade conectores de discurso para darle más cohesión a tu argumento.';
+  fb('fb6', 'ok', msg);
+  markDone('reflect');
+}
+function resetReflect() {
+  document.getElementById('reflectText').value = '';
+  document.getElementById('fb6').className = 'feedback';
+}
+<\/script>
 </body>
 </html>
