@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mi Clase de Inglés</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f0f4ff;
+      color: #1e1e2e;
+      min-height: 100vh;
+    }
+
+    header {
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
+      color: white;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+    }
+
+    header h1 { font-size: 2rem; letter-spacing: 0.5px; }
+    header p  { margin-top: 0.4rem; opacity: 0.85; font-size: 1rem; }
+
+    .progress-bar-wrap {
+      background: rgba(255,255,255,0.25);
+      border-radius: 9999px;
+      height: 8px;
+      width: 260px;
+      margin: 1rem auto 0;
+      overflow: hidden;
+    }
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: #a5f3fc;
+      border-radius: 9999px;
+      transition: width 0.4s ease;
+    }
+    .progress-label { font-size: 0.8rem; margin-top: 0.3rem; opacity: 0.9; }
+
+    main {
+      max-width: 820px;
+      margin: 2rem auto;
+      padding: 0 1rem 3rem;
+    }
+
+    .section-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #4f46e5;
+      margin: 2rem 0 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* ── Exercise cards ── */
+    .card {
+      background: white;
+      border-radius: 14px;
+      padding: 1.4rem 1.6rem;
+      margin-bottom: 1.2rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      border-left: 5px solid #4f46e5;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .card:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,0.1); }
+
+    .card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.8rem; }
+    .card .badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 2px 8px;
+      border-radius: 9999px;
+      margin-bottom: 0.6rem;
+    }
+    .badge-vocab   { background: #ede9fe; color: #6d28d9; }
+    .badge-grammar { background: #dbeafe; color: #1d4ed8; }
+    .badge-reading { background: #d1fae5; color: #065f46; }
+    .badge-listen  { background: #fef3c7; color: #92400e; }
+
+    /* Multiple choice */
+    .options { list-style: none; margin-top: 0.6rem; }
+    .options li {
+      margin: 0.4rem 0;
+    }
+    .options li label {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      cursor: pointer;
+      padding: 0.5rem 0.8rem;
+      border-radius: 8px;
+      border: 2px solid #e5e7eb;
+      transition: border-color 0.2s, background 0.2s;
+      user-select: none;
+    }
+    .options li label:hover { border-color: #4f46e5; background: #f5f3ff; }
+    .options li input[type="radio"] { accent-color: #4f46e5; width: 16px; height: 16px; }
+
+    /* Fill-in-the-blank */
+    .blank-input {
+      border: none;
+      border-bottom: 2px solid #4f46e5;
+      outline: none;
+      font-size: 1rem;
+      width: 120px;
+      padding: 2px 4px;
+      background: transparent;
+      color: #1e1e2e;
+      text-align: center;
+      transition: border-color 0.2s;
+    }
+    .blank-input:focus { border-color: #7c3aed; }
+
+    /* Drag-and-drop word order */
+    .word-bank {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 0.8rem 0;
+    }
+    .word-chip {
+      background: #ede9fe;
+      color: #4f46e5;
+      padding: 0.3rem 0.8rem;
+      border-radius: 9999px;
+      font-size: 0.9rem;
+      cursor: grab;
+      user-select: none;
+      border: 2px solid transparent;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .word-chip:active { cursor: grabbing; transform: scale(1.05); }
+    .word-chip.placed { background: #4f46e5; color: white; cursor: default; }
+    .drop-zone {
+      min-height: 44px;
+      border: 2px dashed #a5b4fc;
+      border-radius: 8px;
+      padding: 0.4rem 0.6rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      align-items: center;
+      color: #a5b4fc;
+      font-size: 0.85rem;
+    }
+    .drop-zone.drag-over { border-color: #4f46e5; background: #f5f3ff; }
+
+    /* Matching */
+    .match-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+      margin-top: 0.6rem;
+    }
+    .match-item {
+      padding: 0.5rem 0.8rem;
+      border-radius: 8px;
+      border: 2px solid #e5e7eb;
+      cursor: pointer;
+      font-size: 0.9rem;
+      text-align: center;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .match-item:hover { border-color: #4f46e5; }
+    .match-item.selected { background: #ede9fe; border-color: #4f46e5; }
+    .match-item.matched  { background: #d1fae5; border-color: #10b981; color: #065f46; cursor: default; }
+    .match-item.wrong    { background: #fee2e2; border-color: #ef4444; }
+
+    /* Buttons */
+    .btn {
+      margin-top: 1rem;
+      padding: 0.5rem 1.2rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .btn:active { transform: scale(0.97); }
+    .btn-primary   { background: #4f46e5; color: white; }
+    .btn-primary:hover { background: #4338ca; }
+    .btn-secondary { background: #e5e7eb; color: #374151; }
+    .btn-secondary:hover { background: #d1d5db; }
+
+    .feedback {
+      margin-top: 0.7rem;
+      padding: 0.5rem 0.9rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      display: none;
+    }
+    .feedback.correct { background: #d1fae5; color: #065f46; display: block; }
+    .feedback.wrong   { background: #fee2e2; color: #991b1b; display: block; }
+    .feedback.info    { background: #dbeafe; color: #1e40af; display: block; }
+
+    /* Score */
+    .score-box {
+      background: white;
+      border-radius: 14px;
+      padding: 1.6rem;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      margin-top: 2rem;
+    }
+    .score-box h2 { color: #4f46e5; font-size: 1.4rem; }
+    .score-num { font-size: 3rem; font-weight: 800; color: #4f46e5; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>🎓 Mi Clase de Inglés</h1>
+  <p>Ejercicios y actividades interactivas</p>
+  <div class="progress-bar-wrap"><div class="progress-bar" id="progressBar"></div></div>
+  <p class="progress-label" id="progressLabel">0 / 5 completados</p>
+</header>
+
+<main>
+
+  <!-- ── 1. Multiple Choice ── -->
+  <div class="section-title">📝 Ejercicios</div>
+
+  <div class="card" id="ex1">
+    <span class="badge badge-vocab">Vocabulario</span>
+    <h3>1. What is the correct translation of "mariposa"?</h3>
+    <ul class="options">
+      <li><label><input type="radio" name="q1" value="a"> Butterfly</label></li>
+      <li><label><input type="radio" name="q1" value="b"> Dragonfly</label></li>
+      <li><label><input type="radio" name="q1" value="c"> Firefly</label></li>
+      <li><label><input type="radio" name="q1" value="d"> Moth</label></li>
+    </ul>
+    <button class="btn btn-primary" onclick="checkMC('q1','a','fb1')">Verificar</button>
+    <button class="btn btn-secondary" onclick="resetMC('q1','fb1')">Reintentar</button>
+    <div class="feedback" id="fb1"></div>
+  </div>
+
+  <div class="card" id="ex2">
+    <span class="badge badge-grammar">Gramática</span>
+    <h3>2. Choose the correct verb form:</h3>
+    <p style="margin-bottom:0.6rem">She _____ to school every day.</p>
+    <ul class="options">
+      <li><label><input type="radio" name="q2" value="a"> go</label></li>
+      <li><label><input type="radio" name="q2" value="b"> goes</label></li>
+      <li><label><input type="radio" name="q2" value="c"> going</label></li>
+      <li><label><input type="radio" name="q2" value="d"> gone</label></li>
+    </ul>
+    <button class="btn btn-primary" onclick="checkMC('q2','b','fb2')">Verificar</button>
+    <button class="btn btn-secondary" onclick="resetMC('q2','fb2')">Reintentar</button>
+    <div class="feedback" id="fb2"></div>
+  </div>
+
+  <!-- ── 2. Fill in the blank ── -->
+  <div class="card" id="ex3">
+    <span class="badge badge-grammar">Completar</span>
+    <h3>3. Fill in the blank with the correct article:</h3>
+    <p style="line-height:2">
+      I saw <input class="blank-input" id="b1" placeholder="a / an / the" />
+      elephant at the zoo. It was
+      <input class="blank-input" id="b2" placeholder="a / an / the" />
+      most beautiful animal.
+    </p>
+    <button class="btn btn-primary" onclick="checkBlanks()">Verificar</button>
+    <button class="btn btn-secondary" onclick="resetBlanks()">Reintentar</button>
+    <div class="feedback" id="fb3"></div>
+  </div>
+
+  <!-- ── 3. Word order ── -->
+  <div class="card" id="ex4">
+    <span class="badge badge-grammar">Orden</span>
+    <h3>4. Arrange the words to form a correct sentence:</h3>
+    <div class="word-bank" id="wordBank"></div>
+    <p style="font-size:0.85rem;color:#6b7280;margin-bottom:0.4rem">Arrastra las palabras aquí:</p>
+    <div class="drop-zone" id="dropZone">Suelta las palabras aquí…</div>
+    <button class="btn btn-primary" onclick="checkOrder()">Verificar</button>
+    <button class="btn btn-secondary" onclick="resetOrder()">Reintentar</button>
+    <div class="feedback" id="fb4"></div>
+  </div>
+
+  <!-- ── 4. Matching ── -->
+  <div class="card" id="ex5">
+    <span class="badge badge-vocab">Emparejar</span>
+    <h3>5. Match each word with its translation:</h3>
+    <div class="match-grid" id="matchGrid"></div>
+    <button class="btn btn-secondary" onclick="resetMatch()">Reintentar</button>
+    <div class="feedback" id="fb5"></div>
+  </div>
+
+  <!-- Score -->
+  <div class="score-box">
+    <h2>Tu puntuación</h2>
+    <div class="score-num" id="scoreNum">0 / 5</div>
+    <p style="color:#6b7280;margin-top:0.4rem">¡Completa todos los ejercicios!</p>
+  </div>
+
+</main>
+
+<script>
+// ── Progress & Score ─────────────────────────────────────────────────────────
+const completed = new Set();
+function markDone(id) {
+  completed.add(id);
+  updateProgress();
+}
+function updateProgress() {
+  const n = completed.size;
+  document.getElementById('progressBar').style.width = (n / 5 * 100) + '%';
+  document.getElementById('progressLabel').textContent = n + ' / 5 completados';
+  document.getElementById('scoreNum').textContent = n + ' / 5';
+}
+
+// ── 1. Multiple Choice ────────────────────────────────────────────────────────
+function checkMC(name, correct, fbId) {
+  const sel = document.querySelector(`input[name="${name}"]:checked`);
+  const fb  = document.getElementById(fbId);
+  if (!sel) { fb.className = 'feedback info'; fb.textContent = '⚠️ Selecciona una opción primero.'; return; }
+  if (sel.value === correct) {
+    fb.className = 'feedback correct';
+    fb.textContent = '✅ ¡Correcto! Muy bien.';
+    markDone(name);
+    document.querySelectorAll(`input[name="${name}"]`).forEach(r => r.disabled = true);
+  } else {
+    fb.className = 'feedback wrong';
+    fb.textContent = '❌ Incorrecto. ¡Inténtalo de nuevo!';
+  }
+}
+function resetMC(name, fbId) {
+  document.querySelectorAll(`input[name="${name}"]`).forEach(r => { r.checked = false; r.disabled = false; });
+  document.getElementById(fbId).className = 'feedback';
+}
+
+// ── 2. Fill in the blank ─────────────────────────────────────────────────────
+function checkBlanks() {
+  const b1 = document.getElementById('b1').value.trim().toLowerCase();
+  const b2 = document.getElementById('b2').value.trim().toLowerCase();
+  const fb = document.getElementById('fb3');
+  if (!b1 || !b2) { fb.className = 'feedback info'; fb.textContent = '⚠️ Completa los dos espacios.'; return; }
+  if (b1 === 'an' && b2 === 'the') {
+    fb.className = 'feedback correct';
+    fb.textContent = '✅ ¡Correcto! "an elephant" y "the most…"';
+    markDone('blanks');
+    document.getElementById('b1').disabled = true;
+    document.getElementById('b2').disabled = true;
+  } else {
+    fb.className = 'feedback wrong';
+    fb.textContent = `❌ Revisa: "${b1}" / "${b2}". Pista: usa "an" antes de vocal y "the" para el superlativo.`;
+  }
+}
+function resetBlanks() {
+  ['b1','b2'].forEach(id => { const el = document.getElementById(id); el.value = ''; el.disabled = false; });
+  document.getElementById('fb3').className = 'feedback';
+}
+
+// ── 3. Word Order ─────────────────────────────────────────────────────────────
+const correctOrder = ['every', 'morning', 'I', 'drink', 'coffee'];
+let dragWord = null;
+
+function buildWordBank() {
+  const shuffled = [...correctOrder].sort(() => Math.random() - 0.5);
+  const bank = document.getElementById('wordBank');
+  bank.innerHTML = '';
+  shuffled.forEach(w => {
+    const chip = document.createElement('div');
+    chip.className = 'word-chip';
+    chip.textContent = w;
+    chip.draggable = true;
+    chip.addEventListener('dragstart', () => { dragWord = w; chip.style.opacity = '0.4'; });
+    chip.addEventListener('dragend',   () => { chip.style.opacity = '1'; });
+    bank.appendChild(chip);
+  });
+
+  const dz = document.getElementById('dropZone');
+  dz.innerHTML = 'Suelta las palabras aquí…';
+  dz.addEventListener('dragover',  e => { e.preventDefault(); dz.classList.add('drag-over'); });
+  dz.addEventListener('dragleave', () => dz.classList.remove('drag-over'));
+  dz.addEventListener('drop', e => {
+    e.preventDefault();
+    dz.classList.remove('drag-over');
+    if (!dragWord) return;
+    const existing = [...bank.querySelectorAll('.word-chip')].find(c => c.textContent === dragWord);
+    if (existing) existing.remove();
+    const chip = document.createElement('div');
+    chip.className = 'word-chip placed';
+    chip.textContent = dragWord;
+    chip.draggable = true;
+    chip.addEventListener('dragstart', () => { dragWord = dragWord; chip.style.opacity='0.4'; });
+    chip.addEventListener('dragend', () => chip.style.opacity='1');
+    chip.addEventListener('click', () => {
+      const w2 = chip.textContent;
+      chip.remove();
+      const c2 = document.createElement('div');
+      c2.className='word-chip'; c2.textContent=w2; c2.draggable=true;
+      c2.addEventListener('dragstart', ()=>{ dragWord=w2; c2.style.opacity='0.4'; });
+      c2.addEventListener('dragend', ()=>c2.style.opacity='1');
+      bank.appendChild(c2);
+      if (dz.children.length===0) dz.textContent='Suelta las palabras aquí…';
+    });
+    if (dz.textContent === 'Suelta las palabras aquí…') dz.textContent = '';
+    dz.appendChild(chip);
+    dragWord = null;
+  });
+}
+
+function checkOrder() {
+  const dz = document.getElementById('dropZone');
+  const words = [...dz.querySelectorAll('.word-chip')].map(c => c.textContent);
+  const fb = document.getElementById('fb4');
+  if (words.length === 0) { fb.className = 'feedback info'; fb.textContent = '⚠️ Arrastra las palabras primero.'; return; }
+  if (JSON.stringify(words) === JSON.stringify(correctOrder)) {
+    fb.className = 'feedback correct';
+    fb.textContent = '✅ ¡Correcto! "Every morning I drink coffee."';
+    markDone('order');
+  } else {
+    fb.className = 'feedback wrong';
+    fb.textContent = '❌ El orden no es correcto. ¡Inténtalo de nuevo!';
+  }
+}
+function resetOrder() {
+  buildWordBank();
+  document.getElementById('fb4').className = 'feedback';
+}
+buildWordBank();
+
+// ── 4. Matching ───────────────────────────────────────────────────────────────
+const matchPairs = [
+  { en: 'Dog',    es: 'Perro' },
+  { en: 'House',  es: 'Casa'  },
+  { en: 'Book',   es: 'Libro' },
+  { en: 'Water',  es: 'Agua'  },
+];
+let firstSel = null;
+let matchedCount = 0;
+
+function buildMatch() {
+  matchedCount = 0;
+  firstSel = null;
+  const grid = document.getElementById('matchGrid');
+  grid.innerHTML = '';
+  const enWords = matchPairs.map(p => p.en).sort(() => Math.random() - 0.5);
+  const esWords = matchPairs.map(p => p.es).sort(() => Math.random() - 0.5);
+  [...enWords, ...esWords].forEach((word, i) => {
+    const div = document.createElement('div');
+    div.className = 'match-item';
+    div.textContent = word;
+    div.dataset.word = word;
+    div.dataset.lang = i < enWords.length ? 'en' : 'es';
+    div.addEventListener('click', () => onMatchClick(div));
+    grid.appendChild(div);
+  });
+  document.getElementById('fb5').className = 'feedback';
+}
+
+function onMatchClick(el) {
+  if (el.classList.contains('matched')) return;
+  if (firstSel === el) { el.classList.remove('selected'); firstSel = null; return; }
+  if (!firstSel) { el.classList.add('selected'); firstSel = el; return; }
+  const a = firstSel, b = el;
+  const pair = matchPairs.find(p =>
+    (p.en === a.dataset.word && p.es === b.dataset.word) ||
+    (p.es === a.dataset.word && p.en === b.dataset.word)
+  );
+  if (pair) {
+    [a, b].forEach(x => { x.classList.remove('selected'); x.classList.add('matched'); });
+    matchedCount++;
+    if (matchedCount === matchPairs.length) {
+      const fb = document.getElementById('fb5');
+      fb.className = 'feedback correct';
+      fb.textContent = '✅ ¡Perfecto! Emparejaste todo correctamente.';
+      markDone('match');
+    }
+  } else {
+    [a, b].forEach(x => { x.classList.remove('selected'); x.classList.add('wrong'); });
+    setTimeout(() => [a, b].forEach(x => x.classList.remove('wrong')), 700);
+  }
+  firstSel = null;
+}
+
+function resetMatch() { buildMatch(); }
+buildMatch();
+</script>
+</body>
+</html>
