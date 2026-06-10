@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Portafolio Dividendero Chile — 2026-06-09</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #0d0d1a; color: #e0e0e0; font-family: 'Segoe UI', Arial, sans-serif; padding: 20px; }
+    h1 { color: #90caf9; font-size: 22px; margin-bottom: 4px; }
+    h2 { color: #7c4dff; font-size: 16px; margin: 20px 0 8px; }
+    .subtitle { color: #888; font-size: 13px; margin-bottom: 20px; }
+    .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 24px; }
+    .kpi { background: #1a1a2e; border: 1px solid #2d2d5e; border-radius: 8px; padding: 14px; }
+    .kpi-label { color: #888; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .kpi-value { font-size: 22px; font-weight: bold; margin-top: 4px; }
+    .kpi-sub { font-size: 11px; color: #aaa; margin-top: 2px; }
+    .green { color: #00c853; }
+    .red { color: #d50000; }
+    .yellow { color: #ffd600; }
+    table { width: 100%; border-collapse: collapse; font-size: 12px; }
+    th { background: #1a1a2e; color: #90caf9; padding: 8px 6px; text-align: center; position: sticky; top: 0; border-bottom: 2px solid #3d3d7a; white-space: nowrap; }
+    td { padding: 7px 6px; border-bottom: 1px solid #1f1f3a; vertical-align: middle; }
+    tr:hover { background: #161630; }
+    .scroll-wrap { overflow-x: auto; border-radius: 8px; border: 1px solid #2d2d5e; }
+    .note-box { background: #1a1a2e; border-left: 3px solid #7c4dff; padding: 10px 14px; margin: 8px 0; font-size: 12px; color: #ccc; border-radius: 4px; }
+    .sector-box { background: #1a1a2e; border: 1px solid #2d2d5e; border-radius: 8px; padding: 14px; max-width: 420px; font-size: 13px; }
+    .legend { display: flex; gap: 12px; flex-wrap: wrap; margin: 8px 0 16px; font-size: 11px; }
+    .leg-item { display: flex; align-items: center; gap: 4px; }
+    .leg-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .footer { color: #555; font-size: 11px; margin-top: 24px; border-top: 1px solid #222; padding-top: 12px; }
+  </style>
+</head>
+<body>
+  <h1>Portafolio Dividendero Chile</h1>
+  <div class="subtitle">Datos al 2026-06-09 · 14 posiciones · Fuente: broker personal + CMF/Bolsa de Santiago</div>
+
+  <!-- KPIs -->
+  <div class="kpi-grid">
+    <div class="kpi">
+      <div class="kpi-label">Valor Total Portafolio</div>
+      <div class="kpi-value green">$18.761.065</div>
+      <div class="kpi-sub">483.0 UF</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Invertido Conocido *</div>
+      <div class="kpi-value">$7.371.906</div>
+      <div class="kpi-sub">Posiciones con costo de adquisición</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">DY Ponderado Portafolio</div>
+      <div class="kpi-value green">6.67%</div>
+      <div class="kpi-sub">Weighted avg por valor de mercado</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">TPM BCCh</div>
+      <div class="kpi-value yellow">5.00%</div>
+      <div class="kpi-sub">Tasa de referencia libre de riesgo</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Spread vs TPM</div>
+      <div class="kpi-value green">+1.7%</div>
+      <div class="kpi-sub">Prima del portafolio sobre tasa libre riesgo</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Posiciones con DY &gt; TPM</div>
+      <div class="kpi-value green">5 / 14</div>
+      <div class="kpi-sub">Batiendo tasa libre de riesgo actual</div>
+    </div>
+  </div>
+
+  <div class="legend">
+    <b style="font-size:12px">DY Color:</b>
+    <div class="leg-item"><div class="leg-dot" style="background:#00c853"></div> ≥8% Excelente</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#64dd17"></div> ≥5% Muy bueno</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#ffd600"></div> ≥3% Aceptable</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#ff6d00"></div> ≥1% Bajo</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#d50000"></div> &lt;1% Sin dividendo</div>
+  </div>
+
+  <h2>Tabla Principal — Dividend Yield Histórico 2021–2026</h2>
+  <div class="scroll-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Empresa</th>
+          <th>Acciones</th>
+          <th>Precio CLP</th>
+          <th>Valor Mercado</th>
+          <th>Invertido</th>
+          <th>Rentab. Total</th>
+          <th>DY 2021</th>
+          <th>DY 2022</th>
+          <th>DY 2023</th>
+          <th>DY 2024</th>
+          <th>DY 2025</th>
+          <th>DY 2026E</th>
+          <th>DY Prom 5a</th>
+          <th>YOC</th>
+          <th>Spread TPM</th>
+          <th>Tendencia</th>
+          <th>Consistencia</th>
+          <th>Payout %</th>
+          <th>Frecuencia</th>
+          <th>% Portafolio</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+    <tr>
+      <td><b>ANDINA-B</b> <span style="background:#1565c0;padding:1px 5px;border-radius:3px;font-size:10px">IPSA</span><br>
+          <small style="color:#aaa">Consumo Básico</small></td>
+      <td style="text-align:right">400</td>
+      <td style="text-align:right">$3.499</td>
+      <td style="text-align:right">$1.399.480</td>
+      <td style="text-align:right">$725.998</td>
+      <td style="text-align:right;color:#00c853">+93.7%</td>
+      <td style="color:#64dd17;font-weight:bold">5.5%</td><td style="color:#64dd17;font-weight:bold">6.8%</td><td style="color:#64dd17;font-weight:bold">5.2%</td><td style="color:#64dd17;font-weight:bold">6.0%</td><td style="color:#64dd17;font-weight:bold">5.4%</td><td style="color:#64dd17;font-weight:bold">6.5%</td>
+      <td style="text-align:right;color:#64dd17;font-weight:bold">5.9%</td>
+      <td style="text-align:right">12.5%</td>
+      <td style="text-align:right;color:#00c853">+1.5%</td>
+      <td style="text-align:right">↓</td>
+      <td style="text-align:right">20 años</td>
+      <td style="text-align:right">75%</td>
+      <td style="text-align:right">Semestral</td>
+      <td style="text-align:right">7.5%</td>
+    </tr>
+    <tr>
+      <td><b>COLBUN</b> <span style="background:#1565c0;padding:1px 5px;border-radius:3px;font-size:10px">IPSA</span><br>
+          <small style="color:#aaa">Utilities</small></td>
+      <td style="text-align:right">5,900</td>
+      <td style="text-align:right">$127</td>
+      <td style="text-align:right">$749.300</td>
+      <td style="text-align:right">$658.540</td>
+      <td style="text-align:right;color:#00c853">+14.1%</td>
+      <td style="color:#ff6d00;font-weight:bold">2.5%</td><td style="color:#ffd600;font-weight:bold">4.2%</td><td style="color:#ffd600;font-weight:bold">3.1%</td><td style="color:#ffd600;font-weight:bold">3.5%</td><td style="color:#ff6d00;font-weight:bold">2.8%</td><td style="color:#ffd600;font-weight:bold">3.0%</td>
+      <td style="text-align:right;color:#ffd600;font-weight:bold">3.2%</td>
+      <td style="text-align:right">3.4%</td>
+      <td style="text-align:right;color:#d50000">-2.0%</td>
+      <td style="text-align:right">↑</td>
+      <td style="text-align:right">10 años</td>
+      <td style="text-align:right">50%</td>
+      <td style="text-align:right">Anual</td>
+      <td style="text-align:right">4.0%</td>
+    </tr>
+    <tr>
+      <td><b>ENELCHILE</b> <span style="background:#1565c0;padding:1px 5px;border-radius:3px;font-size:10px">IPSA</span><br>
+          <small style="color:#aaa">Utilities</small></td>
+      <td style="text-align:right">20,000</td>
+      <td style="text-align:right">$76</td>
+      <td style="text-align:right">$1.520.000</td>
+      <td style="text-align:right">$944.574</td>
+      <td style="text-align:right;color:#00c853">+57.9%</td>
+      <td style="color:#64dd17;font-weight:bold">5.3%</td><td style="color:#ffd600;font-weight:bold">4.8%</td><td style="color:#ffd600;font-weight:bold">3.9%</td><td style="color:#ffd600;font-weight:bold">4.5%</td><td style="color:#ffd600;font-weight:bold">3.6%</td><td style="color:#ffd600;font-weight:bold">4.0%</td>
+      <td style="text-align:right;color:#ffd600;font-weight:bold">4.3%</td>
+      <td style="text-align:right">6.4%</td>
+      <td style="text-align:right;color:#d50000">-1.0%</td>
+      <td style="text-align:right">↓</td>
+      <td style="text-align:right">15 años</td>
+      <td style="text-align:right">70%</td>
+      <td style="text-align:right">Anual</td>
+      <td style="text-align:right">8.1%</td>
+    </tr>
+    <tr>
+      <td><b>HABITAT</b> <br>
+          <small style="color:#aaa">Servicios Financieros</small></td>
+      <td style="text-align:right">1,500</td>
+      <td style="text-align:right">$1.351</td>
+      <td style="text-align:right">$2.025.900</td>
+      <td style="text-align:right">$822.857</td>
+      <td style="text-align:right;color:#00c853">+146.2%</td>
+      <td style="color:#00c853;font-weight:bold">9.0%</td><td style="color:#00c853;font-weight:bold">10.5%</td><td style="color:#00c853;font-weight:bold">11.2%</td><td style="color:#00c853;font-weight:bold">12.8%</td><td style="color:#00c853;font-weight:bold">13.5%</td><td style="color:#00c853;font-weight:bold">12.0%</td>
+      <td style="text-align:right;color:#00c853;font-weight:bold">11.5%</td>
+      <td style="text-align:right">29.5%</td>
+      <td style="text-align:right;color:#00c853">+7.0%</td>
+      <td style="text-align:right">↑</td>
+      <td style="text-align:right">18 años</td>
+      <td style="text-align:right">90%</td>
+      <td style="text-align:right">Anual</td>
+      <td style="text-align:right">10.8%</td>
+    </tr>
+    <tr>
+      <td><b>LTM</b> <span style="background:#1565c0;padding:1px 5px;border-radius:3px;font-size:10px">IPSA</span><br>
+          <small style="color:#aaa">Industrial (Aerolíneas)</small></td>
+      <td style="text-align:right">130,000</td>
+      <td style="text-align:right">$23</td>
+      <td style="text-align:right">$2.939.300</td>
+      <td style="text-align:right">$1.405.169</td>
+      <td style="text-align:right;color:#00c853">+102.6%</td>
+      <td style="color:#d50000;font-weight:bold">0.0%</td><td style="color:#d50000;font-weight:bold">0.0%</td><td style="color:#ff6d00;font-weight:bold">1.0%</td><td style="color:#ff6d00;font-weight:bold">2.5%</td><td style="color:#ffd600;font-weight:bold">3.2%</td><td style="color:#ffd600;font-weight:bold">3.5%</td>
+      <td style="text-align:right;color:#ff6d00;font-weight:bold">1.7%</td>
+      <td style="text-align:right">7.3%</td>
+      <td style="text-align:right;color:#d50000">-1.5%</td>
+      <td style="text-align:right">↑</td>
+      <td style="text-align:right">3 años</td>
+      <td style="text-align:right">30%</td>
+      <td style="text-align:right">Anual</td>
+      <td style="text-align:right">15.7%</td>
+    </tr>
+    <tr>
+      <td><b>PROVIDA</b> <br>
+          <small style="color:#aaa">Servicios Financieros</small></td>
+      <td style="text-align:right">600</td>
+      <td style="text-align:right">$5.035</td>
+      <td style="text-align:right">$3.021.060</td>
+      <td style="text-align:right">$1.270.496</td>
+      <td style="text-align:right;color:#00c853">+138.7%</td>
+      <td style="color:#00c853;font-weight:bold">10.5%</td><td style="color:#00c853;font-weight:bold">12.0%</td><td style="color:#00c853;font-weight:bold">14.5%</td><td style="color:#00c853;font-weight:bold">16.8%</td><td style="color:#00c853;font-weight:bold">15.2%</td><td style="color:#00c853;font-weight:bold">14.5%</td>
+      <td style="text-align:right;color:#00c853;font-weight:bold">13.9%</td>
+      <td style="text-align:right">34.5%</td>
+      <td style="text-align:right;color:#00c853">+9.5%</td>
+      <td style="text-align:right">↑</td>
+      <td style="text-align:right">22 años</td>
+      <td style="text-align:right">95%</td>
+      <td style="text-align:right">Semestral</td>
+      <td style="text-align:right">16.1%</td>
+    </tr>
+    <tr>
+      <td><b>SOQUICOM</b> <br>
+          <small style="color:#aaa">Commodities (Minería)</small></td>
+      <td style="text-align:right">2,500</td>
+      <td style="text-align:right">$374</td>
+      <td style="text-align:right">$935.800</td>
+      <td style="text-align:right">$731.039</td>
+      <td style="text-align:right;color:#00c853">+29.4%</td>
+      <td style="color:#ffd600;font-weight:bold">3.8%</td><td style="color:#ffd600;font-weight:bold">4.5%</td><td style="color:#ffd600;font-weight:bold">4.0%</td><td style="color:#ffd600;font-weight:bold">3.8%</td><td style="color:#ffd600;font-weight:bold">3.5%</td><td style="color:#ffd600;font-weight:bold">3.2%</td>
+      <td style="text-align:right;color:#ffd600;font-weight:bold">3.8%</td>
+      <td style="text-align:right">4.1%</td>
+      <td style="text-align:right;color:#d50000">-1.8%</td>
+      <td style="text-align:right">↓</td>
+      <td style="text-align:right">12 años</td>
+      <td style="text-align:right">55%</td>
+      <td style="text-align:right">Anual</td>
+      <td style="text-align:right">5.0%</td>
+    </tr>
+    <tr>
+      <td><b>VAPORES</b> <span style="background:#1565c0;padding:1px 5px;border-radius:3px;font-size:10px">IPSA</span><br>
+          <small style="color:#aaa">Industrial (Naviero)</small></td>
+      <td style="text-align:right">11,000</td>
+      <td style="text-align:right">$43</td>
+      <td style="text-align:right">$473.000</td>
+      <td style="text-align:right">$813.233</td>
+      <td style="text-align:right;color:#d50000">-41.7%</td>
+      <td style="color:#00c853;font-weight:bold">8.5%</td><td style="color:#00c853;font-weight:bold">44.0%</td><td style="color:#64dd17;font-weight:bold">5.2%</td><td style="color:#ff6d00;font-weight:bold">1.8%</td><td style="color:#ff6d00;font-weight:bold">1.2%</td><td style="color:#d50000;font-weight:bold">0.8%</td>
+      <td style="text-align:right;color:#00c853;font-weight:bold">10.2%</td>
+      <td style="text-align:right">0.5%</td>
+      <td style="text-align:right;color:#d50000">-4.2%</td>
+      <td style="text-align:right">↓</td>
+      <td style="text-align:right">4 años</td>
+      <td style="text-align:right">30%</td>
+      <td style="text-align:right">Anual</td>
+      <td style="text-align:right">2.5%</td>
+    </tr>
+    <tr>
+      <td><b>SQM-B</b> <span style="background:#1565c0;padding:1px 5px;border-radius:3px;font-size:10px">IPSA</span><br>
+          <small style="color:#aaa">Commodities (Litio/Minería)</small></td>
+      <td style="text-align:right">60</td>
+      <td style="text-align:right">$69.065</td>
+      <td style="text-align:right">$4.143.900</td>
+      <td style="text-align:right">—</td>
+      <td style="text-align:right;color:#888">—</td>
+      <td style="color:#64dd17;font-weight:bold">5.2%</td><td style="color:#00c853;font-weight:bold">18.5%</td><td style="color:#00c853;font-weight:bold">9.5%</td><td style="color:#ffd600;font-weight:bold">4.2%</td><td style="color:#ffd600;font-weight:bold">3.5%</td><td style="color:#ffd600;font-weight:bold">3.8%</td>
+      <td style="text-align:right;color:#64dd17;font-weight:bold">7.5%</td>
+      <td style="text-align:right">—</td>
+      <td style="text-align:right;color:#d50000">-1.2%</td>
+      <td style="text-align:right">↓</td>
+      <td style="text-align:right">15 años</td>
+      <td style="text-align:right">80%</td>
+      <td style="text-align:right">Semestral</td>
+      <td style="text-align:right">22.1%</td>
+    </tr>
+    <tr>
+      <td><b>FALABELLA</b> <span style="background:#1565c0;padding:1px 5px;border-radius:3px;font-size:10px">IPSA</span><br>
+          <small style="color:#aaa">Consumo Discrecional (Retail)</small></td>
+      <td style="text-align:right">7</td>
+      <td style="text-align:right">$5.740</td>
+      <td style="text-align:right">$40.180</td>
+      <td style="text-align:right">—</td>
+      <td style="text-align:right;color:#888">—</td>
+      <td style="color:#ff6d00;font-weight:bold">1.8%</td><td style="color:#d50000;font-weight:bold">0.5%</td><td style="color:#d50000;font-weight:bold">0.0%</td><td style="color:#d50000;font-weight:bold">0.8%</td><td style="color:#ff6d00;font-weight:bold">1.5%</td><td style="color:#ff6d00;font-weight:bold">1.8%</td>
+      <td style="text-align:right;color:#ff6d00;font-weight:bold">1.1%</td>
+      <td style="text-align:right">—</td>
+      <td style="text-align:right;color:#d50000">-3.2%</td>
+      <td style="text-align:right">↓</td>
+      <td style="text-align:right">2 años</td>
+      <td style="text-align:right">30%</td>
+      <td style="text-align:right">Anual</td>
+      <td style="text-align:right">0.2%</td>
+    </tr>
+    <tr>
+      <td><b>QUINENCO</b> <span style="background:#1565c0;padding:1px 5px;border-radius:3px;font-size:10px">IPSA</span><br>
+          <small style="color:#aaa">Holding Diversificado</small></td>
+      <td style="text-align:right">81</td>
+      <td style="text-align:right">$3.800</td>
+      <td style="text-align:right">$307.800</td>
+      <td style="text-align:right">—</td>
+      <td style="text-align:right;color:#888">—</td>
+      <td style="color:#ffd600;font-weight:bold">3.5%</td><td style="color:#ffd600;font-weight:bold">4.2%</td><td style="color:#ffd600;font-weight:bold">4.0%</td><td style="color:#ffd600;font-weight:bold">4.8%</td><td style="color:#ffd600;font-weight:bold">4.5%</td><td style="color:#ffd600;font-weight:bold">4.5%</td>
+      <td style="text-align:right;color:#ffd600;font-weight:bold">4.2%</td>
+      <td style="text-align:right">—</td>
+      <td style="text-align:right;color:#d50000">-0.5%</td>
+      <td style="text-align:right">↑</td>
+      <td style="text-align:right">16 años</td>
+      <td style="text-align:right">60%</td>
+      <td style="text-align:right">Anual</td>
+      <td style="text-align:right">1.6%</td>
+    </tr>
+    <tr>
+      <td><b>CFINRENTAS</b> <br>
+          <small style="color:#aaa">Real Estate (REIT local)</small></td>
+      <td style="text-align:right">378</td>
+      <td style="text-align:right">$2.195</td>
+      <td style="text-align:right">$829.793</td>
+      <td style="text-align:right">—</td>
+      <td style="text-align:right;color:#888">—</td>
+      <td style="color:#64dd17;font-weight:bold">5.8%</td><td style="color:#64dd17;font-weight:bold">6.5%</td><td style="color:#64dd17;font-weight:bold">7.2%</td><td style="color:#64dd17;font-weight:bold">7.8%</td><td style="color:#00c853;font-weight:bold">8.0%</td><td style="color:#64dd17;font-weight:bold">7.5%</td>
+      <td style="text-align:right;color:#64dd17;font-weight:bold">7.1%</td>
+      <td style="text-align:right">—</td>
+      <td style="text-align:right;color:#00c853">+2.5%</td>
+      <td style="text-align:right">↑</td>
+      <td style="text-align:right">8 años</td>
+      <td style="text-align:right">85%</td>
+      <td style="text-align:right">Trimestral</td>
+      <td style="text-align:right">4.4%</td>
+    </tr>
+    <tr>
+      <td><b>CENCOSUD</b> <span style="background:#1565c0;padding:1px 5px;border-radius:3px;font-size:10px">IPSA</span><br>
+          <small style="color:#aaa">Consumo Discrecional (Retail)</small></td>
+      <td style="text-align:right">2</td>
+      <td style="text-align:right">$2.105</td>
+      <td style="text-align:right">$4.210</td>
+      <td style="text-align:right">—</td>
+      <td style="text-align:right;color:#888">—</td>
+      <td style="color:#ff6d00;font-weight:bold">2.8%</td><td style="color:#ffd600;font-weight:bold">3.5%</td><td style="color:#ffd600;font-weight:bold">3.0%</td><td style="color:#ffd600;font-weight:bold">3.8%</td><td style="color:#ffd600;font-weight:bold">3.2%</td><td style="color:#ffd600;font-weight:bold">3.5%</td>
+      <td style="text-align:right;color:#ffd600;font-weight:bold">3.3%</td>
+      <td style="text-align:right">—</td>
+      <td style="text-align:right;color:#d50000">-1.5%</td>
+      <td style="text-align:right">↑</td>
+      <td style="text-align:right">12 años</td>
+      <td style="text-align:right">45%</td>
+      <td style="text-align:right">Anual</td>
+      <td style="text-align:right">0.0%</td>
+    </tr>
+    <tr>
+      <td><b>LIPIGAS</b> <br>
+          <small style="color:#aaa">Utilities (Gas Distribución)</small></td>
+      <td style="text-align:right">44</td>
+      <td style="text-align:right">$8.440</td>
+      <td style="text-align:right">$371.342</td>
+      <td style="text-align:right">—</td>
+      <td style="text-align:right;color:#888">—</td>
+      <td style="color:#64dd17;font-weight:bold">5.0%</td><td style="color:#64dd17;font-weight:bold">5.8%</td><td style="color:#64dd17;font-weight:bold">6.2%</td><td style="color:#64dd17;font-weight:bold">6.8%</td><td style="color:#64dd17;font-weight:bold">6.0%</td><td style="color:#64dd17;font-weight:bold">6.5%</td>
+      <td style="text-align:right;color:#64dd17;font-weight:bold">6.0%</td>
+      <td style="text-align:right">—</td>
+      <td style="text-align:right;color:#00c853">+1.5%</td>
+      <td style="text-align:right">↑</td>
+      <td style="text-align:right">14 años</td>
+      <td style="text-align:right">70%</td>
+      <td style="text-align:right">Semestral</td>
+      <td style="text-align:right">2.0%</td>
+    </tr>
+    <tr style="background:#1a237e;font-weight:bold;font-size:14px">
+      <td colspan="3">TOTALES / PONDERADO</td>
+      <td style="text-align:right">$18.761.065</td>
+      <td style="text-align:right">$7.371.906 *</td>
+      <td colspan="8"></td>
+      <td style="text-align:right;color:#64dd17">6.67%</td>
+      <td colspan="4"></td>
+    </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p style="font-size:11px;color:#666;margin-top:6px">* El costo de adquisición solo está disponible para las posiciones con pantalla de detalle individual.</p>
+
+  <!-- Notas por empresa -->
+  <h2>Notas por Empresa</h2>
+  <div class="note-box"><b>ANDINA-B</b> — Una de las pagadoras más consistentes del mercado local.</div><div class="note-box"><b>COLBUN</b> — Dividend variable según resultados hidrológicos y ERNC.</div><div class="note-box"><b>ENELCHILE</b> — Política de dividendo mínimo garantizado vía estatutos Enel Group.</div><div class="note-box"><b>HABITAT</b> — AFP con alta distribución; yield entre los más altos del mercado chileno.</div><div class="note-box"><b>LTM</b> — Reemergió de quiebra en 2022; dividendo en proceso de normalización.</div><div class="note-box"><b>PROVIDA</b> — Controlada por MetLife; distribución casi total de utilidades. Mejor yield del portafolio.</div><div class="note-box"><b>SOQUICOM</b> — Compañía relacionada al grupo SQM; dividendo estable y moderado.</div><div class="note-box"><b>VAPORES</b> — Superciclo naviero 2022 generó dividendo extraordinario ~44%. Ahora normalizado.</div><div class="note-box"><b>SQM-B</b> — Boom del litio 2022. Dividendo cíclico ligado al precio del litio.</div><div class="note-box"><b>FALABELLA</b> — Suspendió dividendo en 2023 por pérdidas operacionales. Recuperación gradual.</div><div class="note-box"><b>QUINENCO</b> — Holding del Grupo Luksic. Dividendo estable y creciente.</div><div class="note-box"><b>CFINRENTAS</b> — Estructura tipo REIT chilena. Alta distribución trimestral; único en su clase en este portafolio.</div><div class="note-box"><b>CENCOSUD</b> — Posición muy pequeña (2 acciones). Considerar ampliar o consolidar.</div><div class="note-box"><b>LIPIGAS</b> — Distribución regulada de gas, flujo estable y predecible.</div>
+
+  <!-- Distribución sectorial -->
+  <h2>Distribución Sectorial (por valor de mercado)</h2>
+  <div class="sector-box">
+    <div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #333"><span>Commodities</span><span>27.1%  ($5.079.700)</span></div><div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #333"><span>Servicios</span><span>26.9%  ($5.046.960)</span></div><div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #333"><span>Industrial</span><span>18.2%  ($3.412.300)</span></div><div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #333"><span>Utilities</span><span>14.1%  ($2.640.642)</span></div><div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #333"><span>Consumo</span><span>7.7%  ($1.443.870)</span></div><div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #333"><span>Real</span><span>4.4%  ($829.793)</span></div><div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #333"><span>Holding</span><span>1.6%  ($307.800)</span></div>
+    <div style="display:flex;justify-content:space-between;padding:6px 0;font-weight:bold;color:#90caf9;margin-top:4px">
+      <span>TOTAL</span><span>$18.761.065</span>
+    </div>
+  </div>
+
+  <!-- Variables estratégicas -->
+  <h2>Variables Clave para Estrategia Dividendera Chilena</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px;margin-bottom:16px">
+
+    <div class="kpi" style="font-size:12px">
+      <div class="kpi-label">TPM vs DY Portafolio</div>
+      <div style="margin-top:8px">
+        <div>TPM BCCh: <b class="yellow">5.0%</b></div>
+        <div>DY ponderado portafolio: <b class="green">6.67%</b></div>
+        <div>Spread: <b class="green">+1.67%</b></div>
+        <div style="margin-top:6px;color:#aaa">El spread positivo justifica el riesgo de renta variable sobre instrumentos de renta fija.</div>
+      </div>
+    </div>
+
+    <div class="kpi" style="font-size:12px">
+      <div class="kpi-label">Ley de Dividendo Mínimo</div>
+      <div style="margin-top:8px;color:#ccc">
+        En Chile, la Ley N°18.046 obliga a las SA abiertas a distribuir al menos el <b>30% de sus utilidades netas</b>.
+        Esto genera un piso de dividendo garantizado para todas las empresas rentables del portafolio.<br><br>
+        <b>AFPs (HABITAT, PROVIDA)</b> típicamente distribuyen &gt;90% por política corporativa.
+      </div>
+    </div>
+
+    <div class="kpi" style="font-size:12px">
+      <div class="kpi-label">Tributación Dividendos Chile</div>
+      <div style="margin-top:8px;color:#ccc">
+        <b>Crédito fiscal:</b> Dividendos llevan crédito por impuesto de primera categoría (27%).<br>
+        <b>Inversores locales:</b> Impuesto Global Complementario con crédito.<br>
+        <b>Inversores extranjeros:</b> 35% retención menos crédito → tasa efectiva ~8%.<br>
+        <b>FIP / Fondos:</b> Régimen especial de transparencia tributaria.
+      </div>
+    </div>
+
+    <div class="kpi" style="font-size:12px">
+      <div class="kpi-label">Yield on Cost (YOC)</div>
+      <div style="margin-top:8px;color:#ccc">
+        Mide el rendimiento real sobre TU precio de compra, no sobre el precio actual.
+        Una acción comprada barata con DY bajo actual puede tener YOC excelente.<br><br>
+        <b>Mejor YOC estimado:</b> PROVIDA (~30%+), HABITAT (~25%+), ENELCHILE (~8%).
+      </div>
+    </div>
+
+    <div class="kpi" style="font-size:12px">
+      <div class="kpi-label">Riesgo de Corte de Dividendo</div>
+      <div style="margin-top:8px;color:#ccc">
+        <span class="red">Alto:</span> LTM (aerolínea, histórico inestable), VAPORES (cíclico), FALABELLA (retail en reestructuración)<br>
+        <span class="yellow">Medio:</span> SQM-B (ligado al litio), COLBUN (hidrología)<br>
+        <span class="green">Bajo:</span> PROVIDA, HABITAT, ANDINA-B, LIPIGAS, CFINRENTAS
+      </div>
+    </div>
+
+    <div class="kpi" style="font-size:12px">
+      <div class="kpi-label">Ciclo Electoral y Riesgo Regulatorio</div>
+      <div style="margin-top:8px;color:#ccc">
+        Chile 2025: Nueva constitución descartada → riesgo regulatorio disminuido.<br>
+        <b>Utilities (ENELCHILE, COLBUN, LIPIGAS):</b> Sujetas a regulación CNE/SEC.<br>
+        <b>AFPs (HABITAT, PROVIDA):</b> Exposición a reforma previsional en curso.<br>
+        <b>Minería (SQM-B):</b> Renegociación contrato Corfo hasta 2030.
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    Generado el 2026-06-10 · Dividend yields históricos basados en datos CMF/Bolsa de Santiago.
+    2026E = estimado a la fecha de corte. Precios al 09/06/2026.
+    Este documento es solo para seguimiento personal y no constituye asesoría financiera.
+    Verificar siempre en <a href="https://www.cmfchile.cl" style="color:#90caf9">cmfchile.cl</a> y
+    <a href="https://www.bolsadesantiago.com" style="color:#90caf9">bolsadesantiago.com</a>.
+  </div>
+</body>
+</html>
